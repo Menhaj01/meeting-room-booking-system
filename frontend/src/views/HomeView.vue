@@ -1,16 +1,28 @@
 <template>
   <div>
-    <h1>Rooms</h1>
-    <p>List of available rooms will appear here.</p>
+    <h1>Available Rooms</h1>
+    <div v-if="roomsStore.rooms.length">
+      <div v-for="room in roomsStore.rooms" :key="room.name">
+        <h2>{{ room.name }}</h2>
+        <p>{{ room.description }}</p>
+        <p>Capacity: {{ room.capacity }}</p>
+      </div>
+    </div>
+    <div v-else>
+      <p>Loading rooms...</p>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-export default {
-  name: 'RoomsView',
-};
-</script>
+import { defineComponent, onMounted } from 'vue';
+import { useRoomsStore } from '../stores/roomsStore';
 
-<style scoped>
-/* Add styles here if necessary */
-</style>
+export default defineComponent({
+  setup() {
+    const roomsStore = useRoomsStore();
+    onMounted(() => roomsStore.loadRooms());
+    return { roomsStore };
+  },
+});
+</script>
