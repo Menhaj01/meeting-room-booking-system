@@ -4,6 +4,7 @@ import {
   type RouteRecordRaw,
 } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
+import RoomView from '../views/RoomView.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -14,7 +15,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/rooms',
     name: 'Rooms',
-    component: () => import('../views/HomeView.vue'),
+    component: RoomView,
   },
 ];
 
