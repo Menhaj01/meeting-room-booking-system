@@ -1,16 +1,12 @@
-import express, { Application } from "express";
+import express from "express";
 import roomsRouter from "./routes/rooms";
 
-const app: Application = express();
-const PORT = 3000;
+const app = express();
 
-// Middleware
 app.use(express.json());
 
-// Routes
 app.use("/api/rooms", roomsRouter);
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+app.listen(3000, () => {
+  console.log("Server running on http://localhost:3000");
 });
