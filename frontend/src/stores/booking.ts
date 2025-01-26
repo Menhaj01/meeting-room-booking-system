@@ -15,7 +15,7 @@ export const useBookingStore = defineStore('booking', () => {
     try {
       isLoading.value = true;
       error.value = null;
-      const response = await axios.get(`${API_URL}/rooms`);
+      const response = await axios.get(`${API_URL}/rooms/all`);
       console.log('response------>>>', response);
       rooms.value = response.data;
     } catch (err: any) {
@@ -72,8 +72,9 @@ export const useBookingStore = defineStore('booking', () => {
       return [];
     }
 
+    // Filter rooms based on bookings
     return rooms.value.filter((room) =>
-      isRoomAvailable(room.name, date, startTime, endTime),
+      isRoomAvailable(room?.id, date, startTime, endTime),
     );
   }
 

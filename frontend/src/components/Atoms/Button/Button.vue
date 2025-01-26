@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps } from 'vue';
+import { computed } from 'vue';
 
 const props = defineProps({
   disabled: {
@@ -22,34 +22,28 @@ const props = defineProps({
   },
   variant: {
     type: String,
-    default: 'default', // Default button style
+    default: 'default',
   },
   size: {
     type: String,
-    default: 'medium', // Size options: small, medium, large
+    default: 'medium',
   },
   customClass: {
     type: String,
-    default: '', // Allow additional custom styles
+    default: '',
   },
 });
 
-// Define variant styles
 const variantStyles = {
-  default: 'bg-gray-900 text-white hover:bg-gray-800',
-  primary: 'bg-blue-600 text-white hover:bg-blue-500',
-  secondary: 'bg-gray-500 text-white hover:bg-gray-400',
-  danger: 'bg-red-600 text-white hover:bg-red-500',
+  default: 'bg-gray-900 text-white hover:bg-gray-800 px-4 py-2 mt-6 w-fit',
 };
 
-// Define size styles
 const sizeStyles = {
   small: 'px-4 py-2 text-sm',
   medium: 'px-6 py-3 text-base',
   large: 'px-8 py-4 text-lg',
 };
 
-// Computed classes for the button
 const buttonClasses = computed(() => {
   return `
     ${variantStyles[props.variant as keyof typeof variantStyles] || variantStyles.default}
