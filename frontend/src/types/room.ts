@@ -2,14 +2,15 @@ export interface Equipment {
   name: string;
 }
 
-export interface Room {
+export type Room = {
+  id: string;
   name: string;
   description: string;
   capacity: number;
-  equipements: Equipment[];
+  equipements: { name: string }[];
   createdAt: string;
   updatedAt: string;
-}
+};
 
 export interface Booking {
   id?: string;
