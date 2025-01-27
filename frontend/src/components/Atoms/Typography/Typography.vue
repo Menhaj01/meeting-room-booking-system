@@ -14,19 +14,18 @@ const props = defineProps({
   },
   variant: {
     type: String,
-    default: 'body', // Default style variant
+    default: 'body',
   },
   tag: {
     type: String,
-    default: 'p', // Default HTML tag
+    default: 'p',
   },
   customClass: {
     type: String,
-    default: '', // Allow additional custom styles
+    default: '',
   },
 });
 
-// Define style variants
 const typographyVariants = {
   h1: 'text-4xl font-bold text-gray-900',
   h2: 'text-3xl font-semibold text-gray-800',
@@ -37,7 +36,6 @@ const typographyVariants = {
   muted: 'text-xs text-gray-400',
 };
 
-// Compute the class for the typography based on the variant
 const typographyClasses = computed(() => {
   return (
     typographyVariants[props.variant as keyof typeof typographyVariants] ||

@@ -1,4 +1,3 @@
-<!-- Molecule.vue -->
 <script setup lang="ts">
 import InputField, {
   type InputFieldProps,
@@ -33,15 +32,16 @@ defineProps({
         @update:modelValue="field.onUpdate"
       />
     </div>
-    <div class="mt-6">
+    <div class="mt-6 w-fit">
       <Button
         :disabled="isLoading"
         variant="default"
         size="medium"
         :onClick="onClick"
-      >
-        {{ isLoading ? 'Loading...' : 'Search Available Rooms' }}
-      </Button>
+        :label="
+          isLoading ? 'Chargement...' : 'Rechercher les chambres disponibles'
+        "
+      />
     </div>
   </div>
 </template>
