@@ -6,7 +6,7 @@
       <div class="flex justify-between items-center mb-4">
         <Typography :text="room.name" variant="h3" tag="h3" />
         <Typography
-          :text="`${room.capacity} people`"
+          :text="`${room.capacity} personnes`"
           variant="muted"
           tag="span"
         />
@@ -14,9 +14,11 @@
       <Typography :text="room.description" variant="body" tag="p" />
       <EquipmentList :equipments="room.equipements" />
     </div>
-    <Button :onClick="() => openBookingModal(room)" variant="default">
-      Book Room
-    </Button>
+    <Button
+      :onClick="() => openBookingModal(room)"
+      variant="default"
+      label="Réserver chambre"
+    />
   </div>
 </template>
 
