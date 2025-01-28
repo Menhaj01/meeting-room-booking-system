@@ -6,17 +6,21 @@ const meta: Meta<typeof BookingForm> = {
   component: BookingForm,
   tags: ['autodocs'],
   argTypes: {
-    bookingDate: {
-      control: 'text',
-      description: 'The date of the booking.',
+    handleSubmit: {
+      action: 'handleSubmit',
+      description: 'Function triggered when the form is submitted.',
     },
-    startTime: {
-      control: 'text',
-      description: 'The start time for the booking.',
+    inputFieldDate: {
+      control: 'object',
+      description: 'Props for the InputField component.',
     },
-    endTime: {
-      control: 'text',
-      description: 'The end time for the booking.',
+    startTimeDropdown: {
+      control: 'object',
+      description: 'Props for the Dropdown component for start time.',
+    },
+    endTimeDropdown: {
+      control: 'object',
+      description: 'Props for the Dropdown component for end time.',
     },
     availabilityMessage: {
       control: 'text',
@@ -30,35 +34,28 @@ const meta: Meta<typeof BookingForm> = {
       control: 'boolean',
       description: 'Whether the selected time slot is available.',
     },
-    availableStartTimes: {
-      control: 'object',
-      description: 'List of available start times for the booking.',
-    },
-    availableEndTimes: {
-      control: 'object',
-      description: 'List of available end times for the booking.',
-    },
-    formatTime: {
-      action: 'formatTime',
-      description: 'Function to format the start and end times.',
-    },
-    today: {
-      control: 'text',
-      description:
-        'Today’s date, used for the minimum date in the date picker.',
-    },
   },
   args: {
-    bookingDate: '',
-    startTime: '',
-    endTime: '',
+    handleSubmit: () => {},
+    inputFieldDate: {
+      label: 'Date',
+      type: 'date',
+      modelValue: '',
+      min: new Date().toISOString().split('T')[0],
+    },
+    startTimeDropdown: {
+      modelValue: '',
+      availableLabels: ['09:00', '10:00', '11:00'],
+      label: 'Heure de début',
+    },
+    endTimeDropdown: {
+      modelValue: '',
+      availableLabels: ['12:00', '13:00', '14:00'],
+      label: 'Fin des temps',
+    },
     availabilityMessage: 'Your selected time is available!',
     isLoading: false,
     isTimeSlotAvailable: true,
-    availableStartTimes: ['09:00', '10:00', '11:00'],
-    availableEndTimes: ['12:00', '13:00', '14:00'],
-    formatTime: (time: string) => time,
-    today: new Date().toISOString().split('T')[0],
   },
 } satisfies Meta<typeof BookingForm>;
 
@@ -68,52 +65,80 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    bookingDate: '',
-    startTime: '',
-    endTime: '',
     availabilityMessage: 'Your selected time is available!',
     isLoading: false,
     isTimeSlotAvailable: true,
-    availableStartTimes: ['09:00', '10:00', '11:00'],
-    availableEndTimes: ['12:00', '13:00', '14:00'],
   },
 };
 
 export const LoadingState: Story = {
   args: {
-    bookingDate: '2025-01-28',
-    startTime: '10:00',
-    endTime: '12:00',
+    inputFieldDate: {
+      label: 'Date',
+      type: 'date',
+      modelValue: '2025-01-28',
+      min: new Date().toISOString().split('T')[0],
+    },
+    startTimeDropdown: {
+      modelValue: '10:00',
+      availableLabels: ['09:00', '10:00', '11:00'],
+      label: 'Heure de début',
+    },
+    endTimeDropdown: {
+      modelValue: '12:00',
+      availableLabels: ['12:00', '13:00', '14:00'],
+      label: 'Fin des temps',
+    },
     availabilityMessage: 'Your selected time is available!',
     isLoading: true,
     isTimeSlotAvailable: true,
-    availableStartTimes: ['09:00', '10:00', '11:00'],
-    availableEndTimes: ['12:00', '13:00', '14:00'],
   },
 };
 
 export const UnavailableTimeSlot: Story = {
   args: {
-    bookingDate: '2025-01-28',
-    startTime: '10:00',
-    endTime: '12:00',
+    inputFieldDate: {
+      label: 'Date',
+      type: 'date',
+      modelValue: '2025-01-28',
+      min: new Date().toISOString().split('T')[0],
+    },
+    startTimeDropdown: {
+      modelValue: '10:00',
+      availableLabels: ['09:00', '10:00', '11:00'],
+      label: 'Heure de début',
+    },
+    endTimeDropdown: {
+      modelValue: '12:00',
+      availableLabels: ['12:00', '13:00', '14:00'],
+      label: 'Fin des temps',
+    },
     availabilityMessage: 'Sorry, this time slot is not available.',
     isLoading: false,
     isTimeSlotAvailable: false,
-    availableStartTimes: ['09:00', '10:00', '11:00'],
-    availableEndTimes: ['12:00', '13:00', '14:00'],
   },
 };
 
 export const WithPreselectedValues: Story = {
   args: {
-    bookingDate: '2025-01-28',
-    startTime: '10:00',
-    endTime: '12:00',
+    inputFieldDate: {
+      label: 'Date',
+      type: 'date',
+      modelValue: '2025-01-28',
+      min: new Date().toISOString().split('T')[0],
+    },
+    startTimeDropdown: {
+      modelValue: '10:00',
+      availableLabels: ['09:00', '10:00', '11:00'],
+      label: 'Heure de début',
+    },
+    endTimeDropdown: {
+      modelValue: '12:00',
+      availableLabels: ['12:00', '13:00', '14:00'],
+      label: 'Fin des temps',
+    },
     availabilityMessage: 'Your selected time is available!',
     isLoading: false,
     isTimeSlotAvailable: true,
-    availableStartTimes: ['09:00', '10:00', '11:00'],
-    availableEndTimes: ['12:00', '13:00', '14:00'],
   },
 };

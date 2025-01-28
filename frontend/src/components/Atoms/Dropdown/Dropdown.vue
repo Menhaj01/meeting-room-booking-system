@@ -1,14 +1,15 @@
-<script setup>
-defineProps({
-  modelValue: String,
-  availableLabels: {
-    type: Array,
-    default: () => [],
-  },
-  label: String,
-});
+<script setup lang="ts">
+import { toRaw } from 'vue';
 
-const emit = defineEmits(['update:modelValue']);
+export interface DropdownProps {
+  label: string;
+  modelValue: string;
+  availableLabels: string[];
+  onChange: (event: Event) => void;
+  disabled?: boolean;
+}
+const props = defineProps<DropdownProps>();
+console.log('-----------------', toRaw(props));
 </script>
 
 <template>
@@ -16,9 +17,10 @@ const emit = defineEmits(['update:modelValue']);
     {{ label }}
   </label>
   <select
+    :disabled="disabled"
     :value="modelValue"
-    @change="$emit('update:modelValue', $event.target.value)"
-    class="w-full rounded-lg border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500"
+    @change="onChange"
+    class="w-full rounded-lg border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 disabled:opacity-50 disabled:cursor-not-allowed"
   >
     <option value="" disabled>Sélectionnez une option</option>
     <option v-for="option in availableLabels" :key="option" :value="option">

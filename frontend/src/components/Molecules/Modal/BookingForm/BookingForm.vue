@@ -1,38 +1,21 @@
 <template>
   <form @submit.prevent="handleSubmit" class="space-y-6">
     <div>
-      <InputField
-        label="Date"
-        type="date"
-        :modelValue="bookingDate"
-        :min="today"
-      />
+      <InputField v-bind="inputFieldDate" />
     </div>
     <div class="grid grid-cols-2 gap-4">
       <div>
-        <Dropdown
-          :modelValue="startTime"
-          :availableLabels="formattedStartTimes"
-          label="Heure de début"
-        />
+        <Dropdown v-bind="startTimeDropdown" />
       </div>
       <div>
-        <Dropdown
-          :modelValue="endTime"
-          :availableLabels="formattedEndTimes"
-          label="Fin des temps"
-        />
+        <Dropdown v-bind="endTimeDropdown" />
       </div>
     </div>
-    <div class="p-4 rounded-lg" :class="availabilityClass">
+    <div v-if="!isAlert" class="p-4 rounded-lg" :class="availabilityClass">
       <Typography :customClass="messageClass" :text="availabilityMessage" />
     </div>
     <div class="flex justify-end">
-      <Button
-        :onClick="handleSubmit"
-        variant="default"
-        :disabled="!isTimeSlotAvailable || isLoading"
-      >
+      <Button variant="default" :disabled="buttonDisabled || isLoading">
         {{ isLoading ? 'Réservation...' : 'Confirmer la réservation' }}
       </Button>
     </div>
@@ -42,42 +25,30 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import Button from '../../../Atoms/Button/Button.vue';
-import InputField from '../../../Atoms/InputField/InputField.vue';
+import InputField, {
+  type InputFieldProps,
+} from '../../../Atoms/InputField/InputField.vue';
 import Typography from '../../../Atoms/Typography/Typography.vue';
-import Dropdown from '../../../Atoms/Dropdown/Dropdown.vue';
+import Dropdown, {
+  type DropdownProps,
+} from '../../../Atoms/Dropdown/Dropdown.vue';
 
 export type BookingFormProps = {
-  bookingDate: string;
-  startTime: string;
-  endTime: string;
+  handleSubmit: () => void;
+  inputFieldDate: InputFieldProps;
+  startTimeDropdown: DropdownProps;
+  endTimeDropdown: DropdownProps;
   availabilityMessage: string;
   isLoading: boolean;
   isTimeSlotAvailable: boolean;
-  availableStartTimes: string[];
-  availableEndTimes: string[];
-  formatTime: (time: string) => string;
-  today: string;
+  buttonDisabled: boolean;
+  isAlert: boolean;
 };
 const props = defineProps<BookingFormProps>();
-
-const emit = defineEmits(['submit']);
-
-const formattedStartTimes = computed(() =>
-  props.availableStartTimes.map((time) => props.formatTime(time)),
-);
-
-const formattedEndTimes = computed(() =>
-  props.availableEndTimes.map((time) => props.formatTime(time)),
-);
-
 const availabilityClass = computed(() =>
   props.isTimeSlotAvailable ? 'bg-green-50' : 'bg-red-50',
 );
 const messageClass = computed(() =>
   props.isTimeSlotAvailable ? 'text-green-700' : 'text-red-700',
 );
-
-const handleSubmit = () => {
-  emit('submit');
-};
 </script>

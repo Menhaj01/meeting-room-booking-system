@@ -15,6 +15,10 @@ defineProps({
     type: Boolean,
     default: false,
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
   onClick: {
     type: Function as unknown as () => (event: MouseEvent) => void,
     required: true,
@@ -34,7 +38,7 @@ defineProps({
     </div>
     <div class="mt-6 w-fit">
       <Button
-        :disabled="isLoading"
+        :disabled="isLoading || disabled"
         variant="default"
         size="medium"
         :onClick="onClick"

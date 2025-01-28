@@ -23,7 +23,7 @@ const props = defineProps({
   },
   onClick: {
     type: Function as unknown as () => (event: MouseEvent) => void,
-    required: true,
+    required: false,
   },
   variant: {
     type: String,

@@ -9,9 +9,10 @@ export interface InputFieldProps {
   placeholder?: string;
   inputClass?: string;
   disabled?: boolean;
+  onUpdate?: (value: string | number) => void;
 }
 
-defineProps<InputFieldProps>();
+const props = defineProps<InputFieldProps>();
 
 const emit = defineEmits<{
   (e: 'update:modelValue', value: string | number): void;
@@ -24,7 +25,11 @@ const inputClasses = computed(
 
 const onInput = (event: Event) => {
   const target = event.target as HTMLInputElement;
+  const value = target.value;
   emit('update:modelValue', target.value);
+  if (props.onUpdate) {
+    props.onUpdate(value);
+  }
 };
 </script>
 
