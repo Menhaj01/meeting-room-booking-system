@@ -20,7 +20,7 @@ const emit = defineEmits<{
 
 const inputClasses = computed(
   () =>
-    'w-full rounded-lg border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500',
+    'w-full rounded-lg border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 disabled:opacity-50 disabled:cursor-not-allowed',
 );
 
 const onInput = (event: Event) => {
