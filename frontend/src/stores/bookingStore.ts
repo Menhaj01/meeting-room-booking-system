@@ -17,6 +17,7 @@ export const useBookingStore = defineStore('bookingStore', {
     selectedDate: '',
     startTime: '',
     endTime: '',
+    showModal: false,
   }),
   actions: {
     setSelectedRoom(room: Room) {
@@ -32,11 +33,15 @@ export const useBookingStore = defineStore('bookingStore', {
     setEndTime(time: string) {
       this.endTime = time;
     },
+    toggleModal(isOpen: boolean) {
+      this.showModal = isOpen;
+    },
     reset() {
       this.selectedRoom = defaultRoom;
       this.selectedDate = '';
       this.startTime = '';
       this.endTime = '';
+      this.showModal = false; // Close modal on reset
     },
   },
 });
