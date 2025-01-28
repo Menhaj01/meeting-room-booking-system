@@ -47,16 +47,26 @@ const meta: Meta<typeof BookingModal> = {
       } as Room,
     },
     bookingForm: {
-      bookingDate: '',
-      startTime: '',
-      endTime: '',
+      handleSubmit: () => {},
+      inputFieldDate: {
+        label: 'Date',
+        type: 'date',
+        modelValue: '',
+        min: new Date().toISOString().split('T')[0],
+      },
+      startTimeDropdown: {
+        modelValue: '',
+        availableLabels: ['09:00', '10:00', '11:00'],
+        label: 'Heure de début',
+      },
+      endTimeDropdown: {
+        modelValue: '',
+        availableLabels: ['12:00', '13:00', '14:00'],
+        label: 'Fin des temps',
+      },
       availabilityMessage: 'Your selected time is available!',
       isLoading: false,
       isTimeSlotAvailable: true,
-      availableStartTimes: ['09:00', '10:00', '11:00'],
-      availableEndTimes: ['12:00', '13:00', '14:00'],
-      formatTime: (time: string) => time,
-      today: new Date().toISOString().split('T')[0],
     },
   },
 } satisfies Meta<typeof BookingModal>;

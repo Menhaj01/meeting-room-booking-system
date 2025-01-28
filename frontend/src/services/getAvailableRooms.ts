@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/api'; // Adjust the URL if needed
+const API_URL = 'http://localhost:3000/api';
 
 export const fetchAvailableRooms = async (
   startTime: string,
@@ -13,9 +13,9 @@ export const fetchAvailableRooms = async (
         endTime,
       },
     });
-    return response.data.rooms; // Return the available rooms
+    return response.data.rooms;
   } catch (error) {
     console.error('Error fetching available rooms:', error);
-    throw error; // Rethrow the error for handling in the component
+    throw error;
   }
 };
