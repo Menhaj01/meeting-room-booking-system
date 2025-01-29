@@ -1,20 +1,23 @@
 <template>
-  <TransitionGroup
-    enter-active-class="transform ease-out duration-300 transition"
-    enter-from-class="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-4"
-    enter-to-class="translate-y-0 opacity-100 sm:translate-x-0"
-    leave-active-class="transition ease-in duration-100"
-    leave-from-class="opacity-100"
-    leave-to-class="opacity-0"
+  <div
     class="fixed inset-0 z-50 flex flex-col items-end justify-start gap-2 p-4 pointer-events-none"
   >
-    <Alert
-      v-for="alert in alerts"
-      :key="alert.id"
-      :alert="alert"
-      @remove-alert="removeAlert"
-    />
-  </TransitionGroup>
+    <TransitionGroup
+      enter-active-class="transform ease-out duration-300 transition"
+      enter-from-class="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-4"
+      enter-to-class="translate-y-0 opacity-100 sm:translate-x-0"
+      leave-active-class="transition ease-in duration-100"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
+    >
+      <Alert
+        v-for="alert in alerts"
+        :key="alert.id"
+        :alert="alert"
+        @remove-alert="removeAlert"
+      />
+    </TransitionGroup>
+  </div>
 </template>
 
 <script lang="ts">
@@ -31,6 +34,7 @@ export default defineComponent({
       required: true,
     },
   },
+  emits: ['remove-alert'],
   methods: {
     removeAlert(id: number) {
       this.$emit('remove-alert', id);

@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits, type PropType } from 'vue';
+import { type PropType } from 'vue';
 import PopupModal, {
   type PopupModalProps,
 } from '../../Atoms/PopupModal/PopupModal.vue';

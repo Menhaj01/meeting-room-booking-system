@@ -13,8 +13,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue';
-
 export type PopupModalProps = {
   open: boolean;
   onClose?: () => void;
