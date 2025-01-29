@@ -1,13 +1,11 @@
 import { RequestHandler } from "express";
 import { getRooms } from "../../services/getRooms";
 import { readJsonFile } from "../../utils/fileUtils";
-import path from "path";
 import { validateTimeRange } from "../../utils/validationUtils";
 import { isRoomAvailable } from "../../utils/roomUtils";
 import { Room } from "../../types/room";
 import { createErrorResponse } from "../../utils/errorUtils";
-
-const bookingsFilePath = path.join(__dirname, "../../data/bookings.json");
+import { BOOKINGS_PATH } from "../../constants/paths";
 
 const getAvailableRoomsHandler: RequestHandler = (req, res, next) => {
   try {
@@ -23,7 +21,7 @@ const getAvailableRoomsHandler: RequestHandler = (req, res, next) => {
     }
 
     const rooms = getRooms();
-    const bookings = readJsonFile(bookingsFilePath) || [];
+    const bookings = readJsonFile(BOOKINGS_PATH) || [];
     const start = new Date(startTime as string);
     const end = new Date(endTime as string);
 
