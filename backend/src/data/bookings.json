@@ -14,53 +14,5 @@
     "startTime": "2025-02-04T09:00:00.000Z",
     "endTime": "2025-02-04T18:00:00.000Z",
     "createdAt": "2025-01-28T08:19:57.905Z"
-  },
-  {
-    "id": "c8d881b4-b2e8-4a32-9f62-4f0065209cca",
-    "roomId": "1",
-    "roomName": "Salle #1",
-    "startTime": "2025-01-28T09:00:00.000Z",
-    "endTime": "2025-01-28T18:00:00.000Z",
-    "createdAt": "2025-01-28T08:20:28.270Z"
-  },
-  {
-    "id": "c8d06ee0-361a-49e2-a3b6-040824c876b7",
-    "roomId": "1",
-    "roomName": "Salle #1",
-    "startTime": "2025-01-29T09:00:00.000Z",
-    "endTime": "2025-01-29T18:00:00.000Z",
-    "createdAt": "2025-01-28T08:28:54.057Z"
-  },
-  {
-    "id": "752d7ffb-1446-4568-b5cb-ea8d2b53c83f",
-    "roomId": "3",
-    "roomName": "Salle Okjsdkso",
-    "startTime": "2025-01-29T09:00:00.000Z",
-    "endTime": "2025-01-29T14:00:00.000Z",
-    "createdAt": "2025-01-28T09:17:20.292Z"
-  },
-  {
-    "id": "81c9ba4e-1a00-4f77-81b2-ec3811e13925",
-    "roomId": "4",
-    "roomName": "Salle de ouf",
-    "startTime": "2025-01-31T09:00:00.000Z",
-    "endTime": "2025-01-31T18:00:00.000Z",
-    "createdAt": "2025-01-28T19:38:08.341Z"
-  },
-  {
-    "id": "842c5a8e-5c05-4355-b7f0-172808baf98c",
-    "roomId": "5",
-    "roomName": "Salle nulle",
-    "startTime": "2025-01-31T09:00:00.000Z",
-    "endTime": "2025-01-31T18:00:00.000Z",
-    "createdAt": "2025-01-28T19:38:39.207Z"
-  },
-  {
-    "id": "0908f38d-59cd-4f08-ba31-516d9ad7c413",
-    "roomId": "5",
-    "roomName": "Salle nulle",
-    "startTime": "2025-01-30T09:00:00.000Z",
-    "endTime": "2025-01-30T13:00:00.000Z",
-    "createdAt": "2025-01-28T19:40:57.914Z"
   }
 ]
