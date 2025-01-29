@@ -1,6 +1,5 @@
 import { RequestHandler } from "express";
 import { v4 as uuidv4 } from "uuid";
-import path from "path";
 import { readJsonFile, writeJsonFile } from "../../utils/fileUtils";
 import { getRooms } from "../../services/getRooms";
 import {
@@ -9,11 +8,7 @@ import {
 } from "../../utils/bookingUtils";
 import { Booking, Room } from "../../types/room";
 import { createErrorResponse } from "../../utils/errorUtils";
-
-const bookingsFilePath: string = path.join(
-  __dirname,
-  "../../data/bookings.json"
-);
+import { BOOKINGS_PATH } from "../../constants/paths";
 
 const createBooking: RequestHandler = (req, res): void => {
   try {
@@ -39,7 +34,7 @@ const createBooking: RequestHandler = (req, res): void => {
       return;
     }
 
-    const bookings: Booking[] = readJsonFile(bookingsFilePath) || [];
+    const bookings: Booking[] = readJsonFile(BOOKINGS_PATH) || [];
     if (checkBookingConflict(bookings, roomName, startTime, endTime)) {
       res
         .status(400)
@@ -56,7 +51,7 @@ const createBooking: RequestHandler = (req, res): void => {
       createdAt: new Date().toISOString(),
     };
 
-    writeJsonFile(bookingsFilePath, [...bookings, newBooking]);
+    writeJsonFile(BOOKINGS_PATH, [...bookings, newBooking]);
     res
       .status(201)
       .json({ message: "Room successfully booked", booking: newBooking });

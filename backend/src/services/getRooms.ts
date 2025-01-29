@@ -1,11 +1,8 @@
 import { readJsonFile } from "../utils/fileUtils";
-import path from "path";
-
-// Paths to JSON data files
-const roomsFilePath = path.join(__dirname, "../data/rooms.json");
+import { ROOMS_PATH } from "../constants/paths";
 
 // Helper function to fetch rooms
 export const getRooms = () => {
-  const data = readJsonFile(roomsFilePath);
+  const data = readJsonFile(ROOMS_PATH);
   return data?.rooms || [];
 };
