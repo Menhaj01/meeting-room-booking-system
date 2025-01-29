@@ -25,10 +25,10 @@ const handleSubmit = async () => {
     );
     await createBooking(bookingStore.selectedRoom.name, startISO, endISO);
     bookingStore.reset();
-    alertStore.addAlert('success', `Room successfully booked.`);
+    alertStore.addAlert('success', `Salle réservée avec succès.`);
   } catch (error) {
     console.error('Error booking room:', error);
-    alertStore.addAlert('error', 'Failed to book the room.');
+    alertStore.addAlert('error', 'Impossible de réserver la salle.');
   }
 };
 const closeModal = () => {
@@ -51,7 +51,10 @@ watch(
         }
       } catch (error) {
         console.error('Error fetching available times:', error);
-        alertStore.addAlert('error', 'Failed to fetch available times.');
+        alertStore.addAlert(
+          'error',
+          'Impossible de récupérer les heures disponibles.',
+        );
       }
     }
   },
@@ -103,7 +106,7 @@ const filteredEndTimes = computed(() => {
       endTimeDropdown: {
         modelValue: bookingStore.endTime,
         availableLabels: filteredEndTimes,
-        label: 'Fin des temps',
+        label: 'Heure de Fin',
         onChange: (event: Event) => {
           const value = (event.target as HTMLSelectElement).value;
           bookingStore.setEndTime(value);

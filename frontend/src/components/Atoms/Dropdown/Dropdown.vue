@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { toRaw } from 'vue';
-
 export interface DropdownProps {
   label: string;
   modelValue: string;
@@ -8,8 +6,7 @@ export interface DropdownProps {
   onChange: (event: Event) => void;
   disabled?: boolean;
 }
-const props = defineProps<DropdownProps>();
-console.log('-----------------', toRaw(props));
+defineProps<DropdownProps>();
 </script>
 
 <template>

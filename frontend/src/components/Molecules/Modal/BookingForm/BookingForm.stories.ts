@@ -47,11 +47,17 @@ const meta: Meta<typeof BookingForm> = {
       modelValue: '',
       availableLabels: ['09:00', '10:00', '11:00'],
       label: 'Heure de début',
+      onChange: function (event: Event): void {
+        throw new Error('Function not implemented.');
+      },
     },
     endTimeDropdown: {
       modelValue: '',
       availableLabels: ['12:00', '13:00', '14:00'],
-      label: 'Fin des temps',
+      label: 'Heure de Fin',
+      onChange: function (event: Event): void {
+        throw new Error('Function not implemented.');
+      },
     },
     availabilityMessage: 'Your selected time is available!',
     isLoading: false,
@@ -83,11 +89,17 @@ export const LoadingState: Story = {
       modelValue: '10:00',
       availableLabels: ['09:00', '10:00', '11:00'],
       label: 'Heure de début',
+      onChange: function (event: Event): void {
+        throw new Error('Function not implemented.');
+      },
     },
     endTimeDropdown: {
       modelValue: '12:00',
       availableLabels: ['12:00', '13:00', '14:00'],
-      label: 'Fin des temps',
+      label: 'Heure de Fin',
+      onChange: function (event: Event): void {
+        throw new Error('Function not implemented.');
+      },
     },
     availabilityMessage: 'Your selected time is available!',
     isLoading: true,
@@ -107,11 +119,17 @@ export const UnavailableTimeSlot: Story = {
       modelValue: '10:00',
       availableLabels: ['09:00', '10:00', '11:00'],
       label: 'Heure de début',
+      onChange: function (event: Event): void {
+        throw new Error('Function not implemented.');
+      },
     },
     endTimeDropdown: {
       modelValue: '12:00',
       availableLabels: ['12:00', '13:00', '14:00'],
-      label: 'Fin des temps',
+      label: 'Heure de Fin',
+      onChange: function (event: Event): void {
+        throw new Error('Function not implemented.');
+      },
     },
     availabilityMessage: 'Sorry, this time slot is not available.',
     isLoading: false,
@@ -131,11 +149,17 @@ export const WithPreselectedValues: Story = {
       modelValue: '10:00',
       availableLabels: ['09:00', '10:00', '11:00'],
       label: 'Heure de début',
+      onChange: function (event: Event): void {
+        throw new Error('Function not implemented.');
+      },
     },
     endTimeDropdown: {
       modelValue: '12:00',
       availableLabels: ['12:00', '13:00', '14:00'],
-      label: 'Fin des temps',
+      label: 'Heure de Fin',
+      onChange: function (event: Event): void {
+        throw new Error('Function not implemented.');
+      },
     },
     availabilityMessage: 'Your selected time is available!',
     isLoading: false,
