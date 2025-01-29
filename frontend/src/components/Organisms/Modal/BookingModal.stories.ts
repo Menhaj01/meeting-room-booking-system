@@ -58,15 +58,23 @@ const meta: Meta<typeof BookingModal> = {
         modelValue: '',
         availableLabels: ['09:00', '10:00', '11:00'],
         label: 'Heure de début',
+        onChange: function (event: Event): void {
+          throw new Error('Function not implemented.');
+        },
       },
       endTimeDropdown: {
         modelValue: '',
         availableLabels: ['12:00', '13:00', '14:00'],
-        label: 'Fin des temps',
+        label: 'Heure de Fin',
+        onChange: function (event: Event): void {
+          throw new Error('Function not implemented.');
+        },
       },
       availabilityMessage: 'Your selected time is available!',
       isLoading: false,
       isTimeSlotAvailable: true,
+      buttonDisabled: false,
+      isAlert: false,
     },
   },
 } satisfies Meta<typeof BookingModal>;

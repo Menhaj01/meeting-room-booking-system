@@ -2,7 +2,7 @@
   <button
     :disabled="disabled"
     :class="[buttonClasses, customClass]"
-    @click="!disabled ? onClick($event) : null"
+    @click="!disabled ? onClick?.($event) : null"
   >
     <span v-if="label" class="mr-2">{{ label }}</span>
     <slot v-else></slot>

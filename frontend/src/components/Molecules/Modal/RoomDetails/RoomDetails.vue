@@ -2,7 +2,7 @@
   <div class="mb-6" v-if="room">
     <Typography
       customClass="text-lg font-semibold text-gray-900 mb-2"
-      text="Détails de la chambre"
+      text="Détails de la salle"
     />
     <div class="space-y-3">
       <div class="flex items-center justify-between">

@@ -19,8 +19,10 @@ onMounted(async () => {
     const rooms = await getRooms();
     roomStore.setAvailableRooms(rooms);
   } catch (error) {
-    console.error('Error fetching rooms:', error);
-    alertStore.addAlert('error', 'Failed to fetch available rooms.');
+    alertStore.addAlert(
+      'error',
+      'Impossible de récupérer les chambres disponibles.',
+    );
   }
 });
 
@@ -34,7 +36,7 @@ const openBookingModal = (room: Room) => {
   <div class="bg-white shadow-lg rounded-xl p-6">
     <Typography
       customClass="text-[20px] font-bold text-gray-900 mb-6"
-      text="Chambres disponibles"
+      text="Salles disponibles"
     />
     <div v-if="roomStore.initialLoading" class="text-center py-8">
       <LoadingState message="Chargement des salles..." />
@@ -45,7 +47,7 @@ const openBookingModal = (room: Room) => {
     >
       <Typography
         customClass="text-gray-500"
-        text="Aucune chambre disponible."
+        text="Aucune salles disponible."
       />
     </div>
     <div v-else class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

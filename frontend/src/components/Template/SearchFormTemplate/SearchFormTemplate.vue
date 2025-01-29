@@ -25,10 +25,13 @@ const searchRooms = async () => {
 
     const rooms = await fetchAvailableRooms(startISO, endISO);
     roomStore.setAvailableRooms(rooms);
-    alertStore.addAlert('success', 'Rooms fetched successfully.');
+    alertStore.addAlert(
+      'success',
+      'Les salles ont été récupérées avec succès.',
+    );
   } catch (error) {
     console.error(error);
-    alertStore.addAlert('error', 'Failed to fetch rooms.');
+    alertStore.addAlert('error', 'Échec de la récupération des salles.');
   } finally {
     searchStore.setLoading(false);
   }
@@ -53,7 +56,7 @@ const searchRooms = async () => {
         disabled: !searchStore.selectedDate,
       },
       {
-        label: 'Fin des temps',
+        label: 'Heure de Fin',
         type: 'time',
         modelValue: searchStore.endTime,
         onUpdate: (value) => (searchStore.endTime = String(value)),

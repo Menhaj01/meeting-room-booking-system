@@ -1,63 +1,32 @@
 import { RequestHandler } from "express";
-import { getRooms } from "../../utils/roomsUtils";
-import { readJsonFile } from "../../utils/fileUtils";
-import path from "path";
-import { Room, Booking } from "../../types/room";
+import { getAvailableTimes } from "../../services/roomService";
+import { createErrorResponse } from "../../utils/errorUtils";
 
-const bookingsFilePath = path.join(__dirname, "../../data/bookings.json");
+const getAvailableTimesForRoomOnDate: RequestHandler = async (
+  req,
+  res,
+  next
+) => {
+  const { roomId, date } = req.params;
 
-const getAvailableTimesForRoomOnDate: RequestHandler = (req, res, next) => {
+  if (!roomId?.trim() || !date?.trim()) {
+    res
+      .status(400)
+      .json(createErrorResponse("Missing roomId or date parameter"));
+    return;
+  }
+
   try {
-    const { roomId, date } = req.params;
-    if (!roomId || !date) {
-      res.status(400).json({ message: "Missing roomId or date parameter" });
+    const result = await getAvailableTimes(roomId, date);
+
+    if (result.error) {
+      res
+        .status(result.status || 500)
+        .json(createErrorResponse(result.message || "An error occurred"));
       return;
     }
 
-    const rooms = getRooms();
-    const bookings: Booking[] = readJsonFile(bookingsFilePath) || [];
-    const timeSlots = Array.from({ length: 10 }, (_, i) => {
-      const hour = i + 9;
-      return `${hour < 10 ? "0" : ""}${hour}:00`;
-    });
-
-    const room = rooms.find((r: Room) => r.id === roomId);
-
-    if (!room) {
-      res.status(404).json({ message: "Room not found" });
-      return;
-    }
-
-    const roomBookings = bookings.filter((booking: Booking) => {
-      const bookingDate = new Date(booking.startTime)
-        .toISOString()
-        .split("T")[0];
-      const queryDate = new Date(date).toISOString().split("T")[0];
-      return booking.roomId === roomId && bookingDate === queryDate;
-    });
-
-    const bookedTimes = new Set<string>();
-
-    roomBookings.forEach((booking: Booking) => {
-      const startTime = new Date(booking.startTime);
-      const endTime = new Date(booking.endTime);
-      let currentTime = startTime;
-      while (currentTime <= endTime) {
-        const time = `${
-          currentTime.getUTCHours() < 10 ? "0" : ""
-        }${currentTime.getUTCHours()}:00`;
-        bookedTimes.add(time);
-        currentTime.setUTCHours(currentTime.getUTCHours() + 1);
-      }
-    });
-
-    const availableTimes = timeSlots.filter((time) => !bookedTimes.has(time));
-
-    res.status(200).json({
-      roomId: room.id,
-      roomName: room.name,
-      availableTimes,
-    });
+    res.status(200).json(result.data);
   } catch (error) {
     next(error);
   }

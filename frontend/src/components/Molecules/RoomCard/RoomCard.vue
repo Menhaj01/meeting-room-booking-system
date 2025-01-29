@@ -17,7 +17,7 @@
     <Button
       :onClick="() => openBookingModal(room)"
       variant="default"
-      label="Réserver chambre"
+      label="Réserver une salle réunion"
     />
   </div>
 </template>

@@ -43,7 +43,9 @@ defineProps({
         size="medium"
         :onClick="onClick"
         :label="
-          isLoading ? 'Chargement...' : 'Rechercher les chambres disponibles'
+          isLoading
+            ? 'Chargement...'
+            : 'Rechercher les salles de réunion disponibles'
         "
       />
     </div>
