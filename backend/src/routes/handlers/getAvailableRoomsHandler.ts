@@ -1,10 +1,11 @@
 import { RequestHandler } from "express";
-import { getRooms } from "../../utils/roomsUtils";
+import { getRooms } from "../../services/getRooms";
 import { readJsonFile } from "../../utils/fileUtils";
 import path from "path";
 import { validateTimeRange } from "../../utils/validationUtils";
 import { isRoomAvailable } from "../../utils/roomUtils";
 import { Room } from "../../types/room";
+import { createErrorResponse } from "../../utils/errorUtils";
 
 const bookingsFilePath = path.join(__dirname, "../../data/bookings.json");
 
@@ -33,7 +34,11 @@ const getAvailableRoomsHandler: RequestHandler = (req, res, next) => {
     if (availableRooms.length === 0) {
       res
         .status(404)
-        .json({ message: "No rooms available for the specified time range." });
+        .json(
+          createErrorResponse(
+            "No rooms available for the specified time range."
+          )
+        );
       return;
     }
 

@@ -1,4 +1,4 @@
-import { readJsonFile } from "./fileUtils";
+import { readJsonFile } from "../utils/fileUtils";
 import path from "path";
 
 // Paths to JSON data files

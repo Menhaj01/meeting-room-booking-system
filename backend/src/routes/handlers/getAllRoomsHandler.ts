@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { getRooms } from "../../utils/roomsUtils";
+import { getRooms } from "../../services/getRooms";
 
 const getAllRoomsHandler: RequestHandler = (req, res, next) => {
   try {

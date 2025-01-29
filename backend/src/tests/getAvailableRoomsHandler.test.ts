@@ -1,14 +1,14 @@
 import request from "supertest";
 import express from "express";
 import router from "../routes/rooms";
-import * as roomsUtils from "../utils/roomsUtils";
+import * as roomsUtils from "../services/getRooms";
 import { readJsonFile } from "../utils/fileUtils";
 
 const app = express();
 app.use(express.json());
 app.use(router);
 
-jest.mock("../utils/roomsUtils");
+jest.mock("../services/getRooms.ts");
 jest.mock("../utils/fileUtils");
 
 describe("GET /rooms/available", () => {

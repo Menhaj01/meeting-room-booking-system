@@ -1,9 +1,9 @@
 import request from "supertest";
 import express from "express";
 import router from "../routes/rooms";
-import { getRooms } from "../utils/roomsUtils";
+import { getRooms } from "../services/getRooms";
 
-jest.mock("../utils/roomsUtils");
+jest.mock("../services/getRooms.ts");
 
 // Create test app
 const app = express();

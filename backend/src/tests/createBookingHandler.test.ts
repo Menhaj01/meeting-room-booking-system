@@ -2,7 +2,7 @@ import request from "supertest";
 import express from "express";
 import createBooking from "../routes/handlers/createBookingHandler";
 import * as fileUtils from "../utils/fileUtils";
-import * as roomsUtils from "../utils/roomsUtils";
+import * as roomsUtils from "../services/getRooms";
 import * as bookingUtils from "../utils/bookingUtils";
 import { Booking, Room } from "../types/room";
 

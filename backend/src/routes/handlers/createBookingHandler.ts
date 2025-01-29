@@ -2,12 +2,13 @@ import { RequestHandler } from "express";
 import { v4 as uuidv4 } from "uuid";
 import path from "path";
 import { readJsonFile, writeJsonFile } from "../../utils/fileUtils";
-import { getRooms } from "../../utils/roomsUtils";
+import { getRooms } from "../../services/getRooms";
 import {
   validateBookingRequest,
   checkBookingConflict,
 } from "../../utils/bookingUtils";
 import { Booking, Room } from "../../types/room";
+import { createErrorResponse } from "../../utils/errorUtils";
 
 const bookingsFilePath: string = path.join(
   __dirname,
@@ -34,7 +35,7 @@ const createBooking: RequestHandler = (req, res): void => {
     const rooms: Room[] = getRooms();
     const room: Room | undefined = rooms.find(({ name }) => name === roomName);
     if (!room) {
-      res.status(404).json({ message: "Room not found" });
+      res.status(404).json(createErrorResponse("Room not found"));
       return;
     }
 
@@ -42,7 +43,7 @@ const createBooking: RequestHandler = (req, res): void => {
     if (checkBookingConflict(bookings, roomName, startTime, endTime)) {
       res
         .status(400)
-        .json({ message: "Room is already booked during this time" });
+        .json(createErrorResponse("Room is already booked during this time"));
       return;
     }
 
@@ -60,8 +61,7 @@ const createBooking: RequestHandler = (req, res): void => {
       .status(201)
       .json({ message: "Room successfully booked", booking: newBooking });
   } catch (error) {
-    console.error("Error creating booking:", error);
-    res.status(500).json({ message: "Internal Server Error" });
+    res.status(500).json(createErrorResponse("Internal Server Error"));
   }
 };
 
